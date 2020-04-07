@@ -22,6 +22,7 @@ const UsersService = {
      .from('quarentv_users')
      .select('score')
      .where({id: userId})
+     .first()
   },
   
   validatePassword(password) {

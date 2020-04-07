@@ -53,11 +53,10 @@ usersRouter
   })
 
   usersRouter
-  .route('/score/:id')
+  .route('/score')
   .get(requireAuth, (req, res, next) => {
-    UsersService.getById(
-      req.app.get('db'),
-      req.params.userId
+    UsersService.getById(req.app.get('db'),
+      req.user.id
     )
       .then(user => {
         console.log(user)
@@ -72,10 +71,10 @@ usersRouter
 
   .post(jsonBodyParser, requireAuth, (req, res, next) => {
   
-    const { score, badge } = req.body
+    const { score } = req.body
     UsersService.updateScore(
       req.app.get('db'),
-      req.user.id, score, badge
+      req.user.id, score
     ) .then (data => {
       res.send("score was updated")
     })

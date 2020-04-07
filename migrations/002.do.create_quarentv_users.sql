@@ -3,7 +3,6 @@ CREATE TABLE quarentv_users (
   user_name TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL,
   score INTEGER,
-  badge TEXT,
   date TIMESTAMP DEFAULT now() NOT NULL
 );
 
