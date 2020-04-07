@@ -1,6 +1,6 @@
 BEGIN;
 
-INSERT INTO reppy_users (user_name, password)
+INSERT INTO quarentv_users (user_name, password, score)
 VALUES
   ('dunder' , '$2a$12$lHK6LVpc15/ZROZcKU00QeiD.RyYq5dVlV/9m4kKYbGibkRc5l4Ne'),
   ('b.deboop', '$2a$12$VQ5HgWm34QQK2rJyLc0lmu59cy2jcZiV6U1.bE8rBBnC9VxDf/YQO'),
@@ -9,7 +9,7 @@ VALUES
   ('lexlor', '$2a$12$Hq9pfcWWvnzZ8x8HqJotveRHLD13ceS7DDbrs18LpK6rfj4iftNw.'),
   ('wippy', '$2a$12$ntGOlTLG5nEXYgDVqk4bPejBoJP65HfH2JEMc1JBpXaVjXo5RsTUu');
 
-INSERT INTO reppy_workouts (title, reps, id, sets, weight)
+INSERT INTO watch_items (title, strmservice, id, date, watched)
 VALUES
   ('First post!', 'Interview', 1,
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus consequuntur deserunt commodi, nobis qui inventore corrupti iusto aliquid debitis unde non. Adipisci, pariatur. Molestiae, libero esse hic adipisci autem neque?'),

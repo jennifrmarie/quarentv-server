@@ -30,7 +30,7 @@ function makeUsersArray() {
   ]
 }
 
-function makeworkoutsArray(users) {
+function makeitemsArray(users) {
   return [
     {
       id: 1,
@@ -67,17 +67,17 @@ function makeworkoutsArray(users) {
   ]
 }
 
-function makeExpectedWorkout(users, workout) {
+function makeExpectedWorkout(users, item) {
   const author = users
-    .find(user => user.id === workout.author_id)
+    .find(user => user.id === item.author_id)
 
 
   return {
-    id: workout.id,
-    reps: workout.reps,
-    sets: workout.sets,
-    weight: workout.weight,
-    date: workout.date.toISOString(),
+    id: item.id,
+    reps: item.reps,
+    sets: item.sets,
+    weight: item.weight,
+    date: item.date.toISOString(),
     author: {
       id: author.id,
       user_name: author.user_name,
@@ -110,10 +110,10 @@ function makeMaliciousWorkout(user) {
   }
 }
 
-function makeworkoutsFixtures() {
+function makeitemsFixtures() {
   const testUsers = makeUsersArray()
-  const testworkouts = makeworkoutsArray(testUsers)
-  return { testUsers, testworkouts }
+  const testitems = makeitemsArray(testUsers)
+  return { testUsers, testitems }
 }
 
 
@@ -122,35 +122,35 @@ function seedUsers(db, users) {
     ...user,
     password: bcrypt.hashSync(user.password, 1)
   }))
-  return db.into('reppy_users').insert(preppedUsers)
+  return db.into('quarentv_users').insert(preppedUsers)
     .then(() =>
       // update the auto sequence to stay in sync
       db.raw(
-        `SELECT setval('reppy_users_id_seq', ?)`,
+        `SELECT setval('quarentv_users_id_seq', ?)`,
         [users[users.length - 1].id],
       )
     )
 }
 
-function seedworkoutsTables(db, users, workouts) {
+function seeditemsTables(db, users, items) {
   // use a transaction to group the queries and auto rollback on any failure
   return db.transaction(async trx => {
     await seedUsers(trx, users)
-    await trx.into('reppy_workouts').insert(workouts)
+    await trx.into('watch_items').insert(items)
     // update the auto sequence to match the forced id values
     await trx.raw(
-      `SELECT setval('reppy_workouts_id_seq', ?)`,
-      [workouts[workouts.length - 1].id],
+      `SELECT setval('watch_items_id_seq', ?)`,
+      [items[items.length - 1].id],
     )
   })
 }
 
-function seedMaliciousWorkout(db, user, workout) {
+function seedMaliciousWorkout(db, user, item) {
   return seedUsers(db, [user])
     .then(() =>
       db
-        .into('reppy_workouts')
-        .insert([workout])
+        .into('watch_items')
+        .insert([item])
     )
 }
 
@@ -164,12 +164,12 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 
 module.exports = {
   makeUsersArray,
-  makeworkoutsArray,
+  makeitemsArray,
   makeExpectedWorkout,
   makeMaliciousWorkout,
 
-  makeworkoutsFixtures,
-  seedworkoutsTables,
+  makeitemsFixtures,
+  seeditemsTables,
   seedMaliciousWorkout,
   makeAuthHeader,
   seedUsers,

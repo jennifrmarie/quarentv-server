@@ -136,7 +136,7 @@ describe('Users Endpoints', function() {
           })
           .expect(res =>
             db
-              .from('reppy_users')
+              .from('quarentv_users')
               .select('*')
               .where({ id: res.body.id })
               .first()

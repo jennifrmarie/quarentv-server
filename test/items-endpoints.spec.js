@@ -2,39 +2,39 @@ const knex = require('knex')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
 
-describe('workouts Endpoints', function() {
+describe('items Endpoints', function() {
   let db
 
   const {
     testUsers,
-    testworkouts,
-  } = helpers.makeworkoutsFixtures()
+    testitems,
+  } = helpers.makeitemsFixtures()
 
   before('make knex instance', () => {
     db = knex({
       client: 'pg',
-      connection: process.env.TEST_DB_URL,
+      connection: process.env.TEST_DATABASE_URL,
     })
     app.set('db', db)
   })
 
   after('disconnect from db', () => db.destroy())
 
-  describe(`GET /api/workouts`, () => {
-    context(`Given no workouts`, () => {
+  describe(`GET /api/items`, () => {
+    context(`Given no items`, () => {
       it(`responds with 200 and an empty list`, () => {
         return supertest(app)
-          .get('/api/workouts')
+          .get('/api/items')
           .expect(200, [])
       })
     })
 
-    context('Given there are workouts in the database', () => {
-      beforeEach('insert workouts', () =>
-        helpers.seedworkoutsTables(
+    context('Given there are items in the database', () => {
+      beforeEach('insert items', () =>
+        helpers.seeditemsTables(
           db,
           testUsers,
-          testworkouts,
+          testitems,
         )
       )
 
