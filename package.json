@@ -25,7 +25,8 @@
     "migrations": "^0.1.7",
     "morgan": "^1.9.1",
     "pg": "^7.18.2",
-    "xss": "^1.0.3"
+    "xss": "^1.0.3",
+    "minimist": ">=0.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
