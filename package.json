@@ -23,10 +23,10 @@
     "jsonwebtoken": "^8.5.0",
     "knex": "^0.20.13",
     "migrations": "^0.1.7",
+    "minimist": "^1.2.5",
     "morgan": "^1.9.1",
     "pg": "^7.18.2",
-    "xss": "^1.0.3",
-    "minimist": ">=0.2.1"
+    "xss": "^1.0.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
