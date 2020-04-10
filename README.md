@@ -1,4 +1,4 @@
-# Reppy, Set, GO!
+# QuarenTV
 *an app that makes being in quarentine just a little more fun*
 
 [Live App](https://quarentv.herokuapp.com/)
