@@ -67,48 +67,7 @@ function makeitemsArray(users) {
   ]
 }
 
-function makeExpectedWorkout(users, item) {
-  const author = users
-    .find(user => user.id === item.author_id)
 
-
-  return {
-    id: item.id,
-    reps: item.reps,
-    sets: item.sets,
-    weight: item.weight,
-    date: item.date.toISOString(),
-    author: {
-      id: author.id,
-      user_name: author.user_name,
-      date: author.date.toISOString(),
-      date_modified: author.date_modified || null,
-    },
-  }
-}
-
-
-function makeMaliciousWorkout(user) {
-  const maliciousWorkout = {
-    id: 911,
-    reps: 'How-to',
-    sets: 3,
-    weight: 124,
-    date: new Date(),
-    name: 'Naughty naughty very naughty <script>alert("xss");</script>',
-    author_id: user.id,
-    // content: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
-  }
-  const expectedWorkout = {
-    ...makeExpectedWorkout([user], maliciousWorkout),
-    title: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
-    name: `Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`,
-  }
-  return {
-    maliciousWorkout,
-    expectedWorkout,
-  }
-}
 
 function makeitemsFixtures() {
   const testUsers = makeUsersArray()
@@ -145,7 +104,7 @@ function seeditemsTables(db, users, items) {
   })
 }
 
-function seedMaliciousWorkout(db, user, item) {
+function seedMaliciousItem(db, user, item) {
   return seedUsers(db, [user])
     .then(() =>
       db
@@ -165,12 +124,10 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 module.exports = {
   makeUsersArray,
   makeitemsArray,
-  makeExpectedWorkout,
-  makeMaliciousWorkout,
 
   makeitemsFixtures,
   seeditemsTables,
-  seedMaliciousWorkout,
+  seedMaliciousItem,
   makeAuthHeader,
   seedUsers,
 }
