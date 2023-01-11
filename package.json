@@ -21,7 +21,7 @@
     "express": "^4.16.4",
     "helmet": "^3.21.3",
     "jsonwebtoken": "^8.5.0",
-    "knex": "^0.20.13",
+    "knex": "^2.4.0",
     "migrations": "^0.1.7",
     "minimist": "^1.2.5",
     "morgan": "^1.9.1",
